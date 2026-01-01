@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FDO Facile - Codice penale</title>
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css">
+
+  <!-- Stili custom -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- JS comuni -->
+  <script src="assets/js/main.js" defer></script>
+  <!-- JS specifico penale -->
+  <script src="assets/js/penale.js" defer></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+  <!-- NAV UGUALE ALLA DASHBOARD (SENZA INFO) + TORNA ALLA DASHBOARD -->
+  <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between h-16">
+        <!-- Logo + data/ora + tema -->
+        <div class="flex">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="index.html" class="text-blue-700 dark:text-blue-400 font-bold text-xl">
+              FDO Facile by Vito Corleone
+            </a>
+          </div>
+
+          <!-- Data e ora (desktop) -->
+          <div class="hidden md:flex items-center text-gray-600 dark:text-gray-300 text-sm ml-4">
+            <svg class="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span id="current-datetime">--</span>
+          </div>
+
+          <!-- Toggle tema (desktop) -->
+          <div class="hidden md:flex items-center ml-4">
+            <label class="theme-toggle" for="theme-toggle-checkbox">
+              <span class="theme-toggle-icon" aria-hidden="true">
+                <!-- Sun -->
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 18a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5L19 19M5 19l-1.5 1.5M20.5 3.5L19 5"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+
+              <input type="checkbox" id="theme-toggle-checkbox" class="theme-toggle-checkbox" />
+              <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+
+              <span class="theme-toggle-icon" aria-hidden="true">
+                <!-- Moon -->
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 12.8A8.5 8.5 0 0 1 11.2 3a6.5 6.5 0 1 0 9.8 9.8Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Menu desktop -->
+        <div class="hidden md:flex md:items-center md:ml-6">
+          <div class="flex space-x-4">
+            <!-- Dashboard (attiva) -->
+            <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="h-4 w-4 mr-1">
+                <rect width="8" height="18" x="3" y="3" rx="1"/>
+                <path d="M7 3v18"/>
+                <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z"/>
+              </svg>
+              Dashboard
+            </a>
+
+            <!-- Codice penale (pagina corrente evidenziata) -->
+            <a href="penale.html" class="bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="h-4 w-4 mr-1">
+                <path d="M10 18v-7"/>
+                <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/>
+                <path d="M14 18v-7"/>
+                <path d="M18 18v-7"/>
+                <path d="M3 22h18"/>
+                <path d="M6 18v-7"/>
+              </svg>
+              Codice penale
+            </a>
+
+            <!-- Codice della strada -->
+            <a href="strada.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="h-4 w-4 mr-1">
+                <path d="M16.05 10.966a5 2.5 0 0 1-8.1 0"/>
+                <path d="m16.923 14.049 4.48 2.04a1 1 0 0 1 .001 1.831l-8.574 3.9a2 2 0 0 1-1.66 0l-8.574-3.91a1 1 0 0 1 0-1.83l4.484-2.04"/>
+                <path d="M16.949 14.14a5 2.5 0 1 1-9.9 0L10.063 3.5a2 2 0 0 1 3.874 0z"/>
+                <path d="M9.194 6.57a5 2.5 0 0 0 5.61 0"/>
+              </svg>
+              Codice della strada
+            </a>
+
+            <!-- Rapporti -->
+            <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="h-4 w-4 mr-1">
+                <path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/>
+                <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+                <path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/>
+              </svg>
+              Rapporti
+            </a>
+
+            <!-- Torna alla dashboard (log-out) -->
+            <a href="index.html" id="back-to-dashboard" class="ml-2 bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center hover:bg-black">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="h-4 w-4 mr-1">
+                <path d="m16 17 5-5-5-5"/>
+                <path d="M21 12H9"/>
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              </svg>
+              Torna alla dashboard
+            </a>
+          </div>
+        </div>
+
+        <!-- Pulsante menu mobile -->
+        <div class="flex items-center md:hidden">
+          <button id="mobile-menu-button" type="button"
+                  class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 focus:outline-none">
+            <span class="sr-only">Apri menu principale</span>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700">
+      <div class="container mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <!-- Data e ora -->
+        <div class="flex items-center text-gray-600 dark:text-gray-300 text-sm px-3 py-2">
+          <svg class="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span id="mobile-current-datetime">--</span>
+        </div>
+
+        <!-- Toggle tema -->
+        <div class="flex items-center px-3 py-2">
+          <label class="theme-toggle" for="mobile-theme-toggle-checkbox">
+            <span class="theme-toggle-icon" aria-hidden="true">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                <path d="M12 18a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <input type="checkbox" id="mobile-theme-toggle-checkbox" class="theme-toggle-checkbox" />
+            <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+            <span class="theme-toggle-icon" aria-hidden="true">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                <path d="M21 12.8A8.5 8.5 0 0 1 11.2 3a6.5 6.5 0 1 0 9.8 9.8Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </label>
+        </div>
+
+        <!-- Voci menu -->
+        <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="h-5 w-5 mr-2">
+            <rect width="8" height="18" x="3" y="3" rx="1"/>
+            <path d="M7 3v18"/>
+            <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z"/>
+          </svg>
+          Dashboard
+        </a>
+
+        <a href="penale.html" class="bg-blue-700 text-white block px-3 py-2 rounded-md text-base font-medium flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="h-5 w-5 mr-2">
+            <path d="M10 18v-7"/>
+            <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/>
+            <path d="M14 18v-7"/>
+            <path d="M18 18v-7"/>
+            <path d="M3 22h18"/>
+            <path d="M6 18v-7"/>
+          </svg>
+          Codice penale
+        </a>
+
+        <a href="strada.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="h-5 w-5 mr-2">
+            <path d="M16.05 10.966a5 2.5 0 0 1-8.1 0"/>
+            <path d="m16.923 14.049 4.48 2.04a1 1 0 0 1 .001 1.831l-8.574 3.9a2 2 0 0 1-1.66 0l-8.574-3.91a1 1 0 0 1 0-1.83l4.484-2.04"/>
+            <path d="M16.949 14.14a5 2.5 0 1 1-9.9 0L10.063 3.5a2 2 0 0 1 3.874 0z"/>
+            <path d="M9.194 6.57a5 2.5 0 0 0 5.61 0"/>
+          </svg>
+          Codice della strada
+        </a>
+
+        <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="h-5 w-5 mr-2">
+            <path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/>
+            <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
+            <path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/>
+          </svg>
+          Rapporti
+        </a>
+
+        <!-- Torna alla dashboard mobile -->
+        <a href="index.html" id="back-to-dashboard-mobile" class="mt-1 bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="h-5 w-5 mr-2">
+            <path d="m16 17 5-5-5-5"/>
+            <path d="M21 12H9"/>
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          </svg>
+          Torna alla dashboard
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER SEZIONE (con icona landmark) -->
+  <header class="bg-blue-700 text-white shadow-lg">
+    <div class="container mx-auto px-4 py-6">
+      <h1 class="text-3xl font-bold flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="h-8 w-8">
+          <path d="M10 18v-7"/>
+          <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/>
+          <path d="M14 18v-7"/>
+          <path d="M18 18v-7"/>
+          <path d="M3 22h18"/>
+          <path d="M6 18v-7"/>
+        </svg>
+        Codice penale
+      </h1>
+      <p class="mt-2 text-blue-100">Visualizza, cerca e seleziona reati dal codice penale</p>
+    </div>
+  </header>
+
+  <!-- QUI mantieni tutto il contenuto originale della pagina penale:
+       - filtri
+       - tabella reati
+       - riepilogo
+       Non lo riscrivo per intero per non rompere il tuo markup esistente. -->
+
+  <!-- INCOLLA QUI sotto il tuo attuale <main> / contenuto di penale.html -->
+
+</body>
+</html>

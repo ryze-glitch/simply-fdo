@@ -9,32 +9,37 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- CSS/JS progetto -->
+  <!-- CSS/JS del tuo progetto -->
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/main.js" defer></script>
 
   <style>
-    /* Norma “pill” come nello screen */
+    /* Pill norma come nelle schermate */
     .norma-pill{
       display:inline-flex;
       align-items:center;
-      gap:.35rem;
+      gap:.25rem;
       background: rgba(59,130,246,.18);
       color: #60a5fa;
       border: 1px solid rgba(59,130,246,.35);
       padding: 6px 10px;
       border-radius: 10px;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
     }
     .norma-pill:hover{ background: rgba(59,130,246,.28); }
+    html:not([data-theme="dark"]) .norma-pill{
+      background: rgba(37,99,235,.10);
+      color: #1d4ed8;
+      border: 1px solid rgba(37,99,235,.25);
+    }
   </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen">
 
-  <!-- NAV -->
+  <!-- NAV (standard coerente col resto) -->
   <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-4">
       <div class="flex justify-between h-16">
@@ -121,7 +126,7 @@
     </div>
   </nav>
 
-  <!-- HEADER -->
+  <!-- HEADER pagina -->
   <header class="bg-blue-700 text-white shadow-lg">
     <div class="container mx-auto px-4 py-6">
       <h1 class="text-3xl font-bold flex items-center gap-2">
@@ -133,8 +138,10 @@
 
   <main class="container mx-auto px-4 py-4">
 
+    <!-- Questo wrapper serve al tuo CSS per “incastrare” filtri + riepilogo -->
     <div id="search-summary-container">
-      <!-- FILTRI -->
+
+      <!-- FILTRI (stile come screenshot) -->
       <div id="search-filters" class="bg-white dark:bg-gray-800 rounded-lg mb-4 shadow-md p-4">
         <div class="flex flex-col md:flex-row md:items-center md:flex-wrap gap-4">
 
@@ -159,6 +166,7 @@
                  class="absolute z-10 mt-1 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 hidden overflow-auto max-h-60"
                  style="width:250px;max-height:300px;">
               <div class="py-1">
+                <!-- ESEMPIO categoria: aggiungine quante vuoi -->
                 <button type="button"
                         class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                         data-categoria="CONTRO LO STATO">
@@ -193,11 +201,11 @@
         <div class="border-t border-gray-200 mx-4"></div>
       </div>
 
-      <!-- riepilogo (popolato da penale.js) -->
+      <!-- riepilogo: viene popolato dal tuo penale.js (stile foto 2) -->
       <div id="riepilogo-container" class="bg-white dark:bg-gray-800 rounded-t-none rounded-b-lg shadow-md p-6 mb-4"></div>
     </div>
 
-    <!-- TABELLA -->
+    <!-- TABELLA REATI -->
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Elenco reati del codice penale</h2>
@@ -206,6 +214,8 @@
 
       <div class="table-container">
         <table class="min-w-full divide-y divide-gray-200">
+
+          <!-- Barra titoli come foto 1 -->
           <thead class="bg-gray-50 dark:bg-gray-700">
             <tr>
               <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Seleziona</th>
@@ -218,12 +228,12 @@
           </thead>
 
           <tbody id="reati-tabella" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-            <!-- ESEMPIO 1 -->
+
+            <!-- ESEMPIO 1 (copialo per gli altri) -->
             <tr>
               <td class="px-4 py-3">
-                <button type="button" onclick="toggleReato('277cp')" aria-label="Seleziona reato">
-                  <!-- QUESTO È IL CHECKBOX -->
-                  <i id="reato-icon-277cp" class="fa-regular fa-square"></i>
+                <button type="button" onclick="toggleReato('277cp')">
+                  <i id="reato-icon-277cp" class="far fa-square"></i>
                 </button>
               </td>
 
@@ -250,23 +260,26 @@
               </td>
             </tr>
 
-            <!-- DUPLICA QUI I TR -->
+            <!-- INCOLLA QUI GLI ALTRI TR -->
           </tbody>
         </table>
       </div>
     </div>
   </main>
 
-  <!-- JS pagina -->
+  <!-- JS logica pagina (selezione/riepilogo/filtri/link norme) -->
   <script src="assets/js/penale.js"></script>
 
-  <!-- Link Brocardi -->
+  <!-- Link Brocardi (aggiungi qui tutte le norme) -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       if (typeof setNormaLinks === "function") {
         setNormaLinks(
           "art. 277 c.p.|https://www.brocardi.it/codice-penale/libro-secondo/titolo-primo/capo-i/art277.html"
         );
+
+        // ESEMPIO (copiami questa riga per ogni reato):
+        // setNormaLinks("art. XXX c.p.|https://www.brocardi.it/....");
       }
     });
   </script>

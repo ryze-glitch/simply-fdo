@@ -5,53 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FDO Facile - Codice penale</title>
 
-  <!-- Tailwind + FontAwesome -->
+  <!-- Tailwind via CDN (così non ti serve tailwind.min.css locale) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- CSS/JS del tuo progetto -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Font Awesome (LOCALE: tu ce l'hai) -->
+  <link rel="stylesheet" href="assets/css/all.min.css" />
+
+  <!-- Stili custom (il tuo) -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Script -->
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/penale.js" defer></script>
 
-  <style>
-    /* Pill norma come nelle schermate */
-    .norma-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:.25rem;
-      background: rgba(59,130,246,.18);
-      color: #60a5fa;
-      border: 1px solid rgba(59,130,246,.35);
-      padding: 6px 10px;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .norma-pill:hover{ background: rgba(59,130,246,.28); }
-    html:not([data-theme="dark"]) .norma-pill{
-      background: rgba(37,99,235,.10);
-      color: #1d4ed8;
-      border: 1px solid rgba(37,99,235,.25);
-    }
-  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof setNormaLinks === "function") {
+        setNormaLinks(
+          "art. 277 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-i/capo-ii/art277.html",
+          "art. 278 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-i/capo-ii/art278.html",
+          "art. 322 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-i/art322.html",
+          "art. 336 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art336.html",
+          "art. 337 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art337.html",
+          "art. 338 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art338.html",
+          "art. 340 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art340.html",
+          "art. 341 bis c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art341bis.html",
+          "art. 342 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art342.html",
+          "art. 343 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art343.html",
+          "art. 347 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art347.html",
+          "art. 348 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art348.html",
+          "art. 349 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-ii/capo-ii/art349.html",
+          "art. 378 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-iii/capo-i/art378.html",
+          "art. 379 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-iii/capo-i/art379.html",
+          "art. 385 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-iii/capo-ii/art385.html",
+          "art. 386 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-iii/capo-ii/art386.html",
+          "art. 414 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-v/art414.html",
+          "art. 415 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-v/art415.html",
+          "art. 421 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-v/art421.html",
+          "art. 423 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-vi/capo-i/art423.html",
+          "art. 494 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-vii/capo-iv/art494.html",
+          "art. 495 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-vii/capo-iv/art495.html",
+          "art. 498 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-vii/capo-iv/art498.html",
+          "artt. 56 e 575 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-i/art575.html",
+          "art. 581 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-i/art581.html",
+          "art. 582 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-i/art582.html",
+          "art. 588 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-i/art588.html",
+          "art. 590 bis c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-i/art590bis.html",
+          "art. 593 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-i/art593.html",
+          "art. 605 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-iii/sezione-ii/art605.html",
+          "art. 611 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-iii/sezione-iii/art611.html",
+          "art. 612 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-iii/sezione-iii/art612.html",
+          "art. 613 bis c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-iii/sezione-iii/art613bis.html",
+          "art. 614 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xii/capo-iii/sezione-iv/art614.html",
+          "art. 624 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-i/art624.html",
+          "art. 628 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-i/art628.html",
+          "art. 629 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-i/art629.html",
+          "art. 635 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-i/art635.html",
+          "art. 640 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-ii/art640.html",
+          "art. 646 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-ii/art646.html",
+          "art. 648 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-ii/art648.html",
+          "art. 648 bis c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-ii/art648bis.html",
+          "art. 648 ter c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-ii/art648ter.html",
+          "art. 648 ter 1 c.p.", "https://www.brocardi.it/codice-penale/libro-secondo/titolo-xiii/capo-ii/art648ter1.html",
+          "art. 651 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-i/art651.html",
+          "art. 658 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-i/art658.html",
+          "art. 660 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-i/art660.html",
+          "art. 682 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-iii/art682.html",
+          "art. 695 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-iii/art695.html",
+          "art. 697 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-iii/art697.html",
+          "art. 699 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-iii/art699.html",
+          "art. 703 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-iii/art703.html",
+          "art. 707 c.p.", "https://www.brocardi.it/codice-penale/libro-terzo/titolo-i/capo-i/sezione-iii/art707.html",
+          "art. 73 TUS", "https://www.brocardi.it/testo-unico-stupefacenti/titolo-viii/capo-i/art73.html",
+          "art. 75 TUS", "https://www.brocardi.it/testo-unico-stupefacenti/titolo-viii/capo-i/art75.html",
+          "art. 18 TULPS", "https://www.brocardi.it/testo-unico-pubblica-sicurezza/titolo-ii/capo-i/art18.html",
+          "art. 28 TULPS", "https://www.brocardi.it/testo-unico-pubblica-sicurezza/titolo-ii/capo-iii/art28.html",
+          "art. 5 L. 152/1975", "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1975-05-22;152~art5",
+          "art. 116 c.15 CdS", "https://www.brocardi.it/codice-della-strada/titolo-iv/art116.html"
+        );
+      }
+    });
+  </script>
 </head>
 
 <body class="bg-gray-100 min-h-screen">
+  <div id="loading-indicator" class="loading">
+    <div class="spinner"></div>
+  </div>
 
-  <!-- NAV (standard coerente col resto) -->
+  <!-- NAV identica al file originale -->
   <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-4">
       <div class="flex justify-between h-16">
-
         <div class="flex">
           <div class="flex-shrink-0 flex items-center">
-            <a href="index.html" class="text-blue-700 dark:text-blue-400 font-bold text-xl">
-              FDO Facile by Vito Corleone
-            </a>
+            <a href="https://discord.com/users/bios_wr" target="_blank"
+              class="text-blue-700 dark:text-blue-400 font-bold text-xl">FDO Facile by Vito Corleone</a>
           </div>
 
-          <div class="hidden md:flex items-center text-gray-600 dark:text-gray-300 text-sm ml-4">
+          <div class="hidden md:flex items-center text-gray-600 dark:text-gray-300 text-sm">
             <i class="far fa-clock mr-2"></i>
             <span id="current-datetime">--</span>
           </div>
@@ -59,7 +111,7 @@
           <div class="hidden md:flex items-center ml-4">
             <label class="theme-toggle" for="theme-toggle-checkbox">
               <span class="theme-toggle-icon"><i class="fas fa-sun"></i></span>
-              <input type="checkbox" id="theme-toggle-checkbox" class="theme-toggle-checkbox" />
+              <input type="checkbox" id="theme-toggle-checkbox" class="theme-toggle-checkbox">
               <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
               <span class="theme-toggle-icon"><i class="fas fa-moon"></i></span>
             </label>
@@ -68,16 +120,20 @@
 
         <div class="hidden md:flex md:items-center md:ml-6">
           <div class="flex space-x-4">
-            <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+            <a href="index.html"
+              class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
             </a>
-            <a href="penale.html" class="bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+            <a href="penale.html"
+              class="bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <i class="fas fa-gavel mr-1"></i> Codice penale
             </a>
-            <a href="strada.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+            <a href="strada.html"
+              class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <i class="fas fa-road mr-1"></i> Codice della strada
             </a>
-            <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+            <a href="index.html"
+              class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <i class="fas fa-file-alt mr-1"></i> Rapporti
             </a>
           </div>
@@ -85,12 +141,11 @@
 
         <div class="flex items-center md:hidden">
           <button id="mobile-menu-button" type="button"
-                  class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 focus:outline-none">
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 focus:outline-none">
             <span class="sr-only">Apri menu principale</span>
             <i class="fas fa-bars"></i>
           </button>
         </div>
-
       </div>
     </div>
 
@@ -104,44 +159,46 @@
         <div class="flex items-center px-3 py-2">
           <label class="theme-toggle" for="mobile-theme-toggle-checkbox">
             <span class="theme-toggle-icon"><i class="fas fa-sun"></i></span>
-            <input type="checkbox" id="mobile-theme-toggle-checkbox" class="theme-toggle-checkbox" />
+            <input type="checkbox" id="mobile-theme-toggle-checkbox" class="theme-toggle-checkbox">
             <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
             <span class="theme-toggle-icon"><i class="fas fa-moon"></i></span>
           </label>
         </div>
 
-        <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
+        <a href="index.html"
+          class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
           <i class="fas fa-tachometer-alt mr-2 w-5 text-center"></i> Dashboard
         </a>
-        <a href="penale.html" class="bg-blue-700 text-white block px-3 py-2 rounded-md text-base font-medium flex items-center">
+        <a href="penale.html"
+          class="bg-blue-700 text-white block px-3 py-2 rounded-md text-base font-medium flex items-center">
           <i class="fas fa-gavel mr-2 w-5 text-center"></i> Codice penale
         </a>
-        <a href="strada.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
+        <a href="strada.html"
+          class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
           <i class="fas fa-road mr-2 w-5 text-center"></i> Codice della strada
         </a>
-        <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
+        <a href="index.html"
+          class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
           <i class="fas fa-file-alt mr-2 w-5 text-center"></i> Rapporti
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- HEADER pagina -->
   <header class="bg-blue-700 text-white shadow-lg">
     <div class="container mx-auto px-4 py-6">
-      <h1 class="text-3xl font-bold flex items-center gap-2">
-        <i class="fas fa-gavel"></i> Codice penale
+      <h1 class="text-3xl font-bold">
+        <i class="fas fa-gavel mr-1"></i> Codice penale
       </h1>
-      <p class="mt-2 text-blue-100">Visualizza, cerca e seleziona reati dal codice penale</p>
+      <p class="mt-2 text-blue-100">Visualizza, cerca e seleziona reati dal codice penale IPRP</p>
     </div>
   </header>
 
   <main class="container mx-auto px-4 py-4">
 
-    <!-- Questo wrapper serve al tuo CSS per “incastrare” filtri + riepilogo -->
+    <!-- Filtri + riepilogo -->
     <div id="search-summary-container">
 
-      <!-- FILTRI (stile come screenshot) -->
       <div id="search-filters" class="bg-white dark:bg-gray-800 rounded-lg mb-4 shadow-md p-4">
         <div class="flex flex-col md:flex-row md:items-center md:flex-wrap gap-4">
 
@@ -150,72 +207,83 @@
               <i class="fas fa-search text-gray-400"></i>
             </div>
             <input type="text" id="search-input"
-                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   placeholder="Cerca per reato o norma...">
+              class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Cerca per reato o norma..." />
           </div>
 
           <div class="relative inline-block" id="categoria-dropdown-container">
             <button type="button" id="categoria-dropdown-button"
-                    class="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md flex items-center whitespace-nowrap overflow-hidden"
-                    style="width:210px;text-overflow:ellipsis;">
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md flex items-center whitespace-nowrap overflow-hidden"
+              style="width: 210px; text-overflow: ellipsis;">
+              <i class="fas fa-filter mr-1 flex-shrink-0"></i>
               <span class="truncate">Filtra per categoria</span>
-              <i class="fas fa-chevron-down ml-2"></i>
+              <i class="fas fa-chevron-down ml-1 flex-shrink-0"></i>
             </button>
 
             <div id="categoria-dropdown-menu"
-                 class="absolute z-10 mt-1 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 hidden overflow-auto max-h-60"
-                 style="width:250px;max-height:300px;">
+              class="absolute z-10 mt-1 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 hidden overflow-auto max-h-60"
+              style="width: 250px; max-height: 300px;">
               <div class="py-1">
-                <!-- ESEMPIO categoria: aggiungine quante vuoi -->
-                <button type="button"
-                        class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        data-categoria="CONTRO LO STATO">
-                  CONTRO LO STATO
-                </button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="CONTRAVVENZIONI DI POLIZIA">CONTRAVVENZIONI DI POLIZIA</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="CONTRO IL PATRIMONIO">CONTRO IL PATRIMONIO</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="CONTRO L'AMMINISTRAZIONE DELLA GIUSTIZIA">CONTRO L'AMMINISTRAZIONE DELLA GIUSTIZIA</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="CONTRO LA PERSONA">CONTRO LA PERSONA</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="CONTRO LA PUBBLICA AMMINISTRAZIONE">CONTRO LA PUBBLICA AMMINISTRAZIONE</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="CONTRO LO STATO">CONTRO LO STATO</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="CONTRO ORDINE, INCOLUMITA' E FEDE PUBBLICA">CONTRO ORDINE, INCOLUMITA' E FEDE PUBBLICA</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="ILLECITI AMMINISTRATIVI">ILLECITI AMMINISTRATIVI</button>
+                <button type="button" class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" data-categoria="LEGGI SPECIALI">LEGGI SPECIALI</button>
               </div>
             </div>
           </div>
 
           <div class="flex flex-wrap gap-4">
-            <button type="button" id="reset-filters"
-                    class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md flex items-center gap-2">
-              <i class="fas fa-xmark"></i> Pulisci filtri
+            <button type="button" id="reset-filters" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md flex items-center">
+              <i class="fas fa-times mr-1"></i> Pulisci filtri
             </button>
 
-            <button type="button" onclick="clearSelected()"
-                    class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-md flex items-center gap-2">
-              <i class="fas fa-xmark"></i> Pulisci reati
+            <button type="button" onclick="clearSelected()" class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-md flex items-center">
+              <i class="fas fa-times mr-1"></i> Pulisci reati
             </button>
 
-            <button type="button" id="toggle-riepilogo" data-state="1"
-                    class="px-4 py-2 bg-blue-600 text-white rounded-md flex items-center gap-2">
-              <i class="fas fa-eye-slash"></i>
-              <span>Nascondi riepilogo</span>
+            <button type="button" id="toggle-riepilogo"
+              class="px-4 py-2 bg-blue-100 text-blue-700 rounded-md flex items-center justify-center"
+              data-state="0"
+              style="width: 190px; min-width: 190px; height: 40px; line-height: 1.5;">
+              <i class="fas fa-eye mr-1"></i> Mostra riepilogo
             </button>
           </div>
+
         </div>
       </div>
 
-      <!-- separatore -->
-      <div id="custom-separator" class="bg-white dark:bg-gray-800 px-8">
+      <div id="custom-separator" class="hidden bg-white dark:bg-gray-800 px-8">
         <div class="border-t border-gray-200 mx-4"></div>
       </div>
 
-      <!-- riepilogo: viene popolato dal tuo penale.js (stile foto 2) -->
-      <div id="riepilogo-container" class="bg-white dark:bg-gray-800 rounded-t-none rounded-b-lg shadow-md p-6 mb-4"></div>
+      <div id="riepilogo-container" class="bg-white dark:bg-gray-800 rounded-t-none rounded-b-lg shadow-md p-6 mb-4 hidden">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-bold text-gray-800 dark:text-white">Riepilogo reati selezionati</h2>
+        </div>
+        <div class="text-center py-8 text-gray-500">
+          <i class="fas fa-exclamation-circle text-4xl mb-2"></i>
+          <p>Nessun reato selezionato</p>
+        </div>
+      </div>
+
     </div>
 
-    <!-- TABELLA REATI -->
+    <!-- Tabella (qui devi avere i tuoi <tr> già presenti: se li hai persi, li recuperi dal file originale) -->
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Elenco reati del codice penale</h2>
-        <p class="mt-1 text-sm text-gray-500" id="reati-conteggio">0 reati trovati. Seleziona i reati per aggiungerli al riepilogo.</p>
+        <h2 class="text-lg font-medium text-gray-900">Elenco reati del codice penale</h2>
+        <p class="mt-1 text-sm text-gray-500" id="reati-conteggio">
+          62 reati trovati. Seleziona i reati per aggiungerli al riepilogo.
+        </p>
       </div>
 
       <div class="table-container">
         <table class="min-w-full divide-y divide-gray-200">
-
-          <!-- Barra titoli come foto 1 -->
           <thead class="bg-gray-50 dark:bg-gray-700">
             <tr>
               <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Seleziona</th>
@@ -227,61 +295,18 @@
             </tr>
           </thead>
 
-          <tbody id="reati-tabella" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-
-            <!-- ESEMPIO 1 (copialo per gli altri) -->
-            <tr>
-              <td class="px-4 py-3">
-                <button type="button" onclick="toggleReato('277cp')">
-                  <i id="reato-icon-277cp" class="far fa-square"></i>
-                </button>
-              </td>
-
-              <td class="px-4 py-3 font-semibold text-gray-900 dark:text-white">
-                Offesa alla libertà del Presidente della Repubblica
-              </td>
-
-              <td class="px-4 py-3">
-                <button type="button" onclick="apriNorma('art. 277 c.p.')" class="norma-pill">
-                  <i class="fas fa-book"></i> art. 277 c.p.
-                </button>
-              </td>
-
-              <td class="px-4 py-3 text-gray-700 dark:text-gray-200">
-                CONTRO LO STATO
-              </td>
-
-              <td class="px-4 py-3 text-gray-700 dark:text-gray-200">
-                -
-              </td>
-
-              <td class="px-4 py-3 text-gray-700 dark:text-gray-200">
-                15 mesi
-              </td>
-            </tr>
-
-            <!-- INCOLLA QUI GLI ALTRI TR -->
+          <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700" id="reati-tabella">
+            <!-- INCOLLA QUI i 62 <tr> dal tuo FDO-Facile-Codice-penale.html -->
           </tbody>
         </table>
       </div>
     </div>
+
   </main>
 
-  <!-- JS logica pagina (selezione/riepilogo/filtri/link norme) -->
-  <script src="assets/js/penale.js"></script>
-
-  <!-- Link Brocardi (aggiungi qui tutte le norme) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof setNormaLinks === "function") {
-        setNormaLinks(
-          "art. 277 c.p.|https://www.brocardi.it/codice-penale/libro-secondo/titolo-primo/capo-i/art277.html"
-        );
-
-        // ESEMPIO (copiami questa riga per ogni reato):
-        // setNormaLinks("art. XXX c.p.|https://www.brocardi.it/....");
-      }
-    });
-  </script>
+  <button id="back-to-top"
+    class="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 opacity-0 invisible transition-all duration-300 z-40">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 </body>
 </html>

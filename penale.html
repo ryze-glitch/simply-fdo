@@ -5,27 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FDO Facile - Codice penale</title>
 
-  <!-- Tailwind via CDN -->
+  <!-- Tailwind + FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="assets/css/all.min.css">
-
-  <!-- Stili custom -->
+  <!-- CSS/JS progetto -->
   <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- JS comuni -->
   <script src="assets/js/main.js" defer></script>
-  <!-- JS specifico penale -->
-  <script src="assets/js/penale.js" defer></script>
+
+  <style>
+    /* Norma “pill” come nello screen */
+    .norma-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      background: rgba(59,130,246,.18);
+      color: #60a5fa;
+      border: 1px solid rgba(59,130,246,.35);
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .norma-pill:hover{ background: rgba(59,130,246,.28); }
+  </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen">
-  <!-- NAV UGUALE ALLA DASHBOARD (SENZA INFO) + TORNA ALLA DASHBOARD -->
+
+  <!-- NAV -->
   <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-4">
       <div class="flex justify-between h-16">
-        <!-- Logo + data/ora + tema -->
+
         <div class="flex">
           <div class="flex-shrink-0 flex items-center">
             <a href="index.html" class="text-blue-700 dark:text-blue-400 font-bold text-xl">
@@ -33,245 +46,229 @@
             </a>
           </div>
 
-          <!-- Data e ora (desktop) -->
           <div class="hidden md:flex items-center text-gray-600 dark:text-gray-300 text-sm ml-4">
-            <svg class="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
+            <i class="far fa-clock mr-2"></i>
             <span id="current-datetime">--</span>
           </div>
 
-          <!-- Toggle tema (desktop) -->
           <div class="hidden md:flex items-center ml-4">
             <label class="theme-toggle" for="theme-toggle-checkbox">
-              <span class="theme-toggle-icon" aria-hidden="true">
-                <!-- Sun -->
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 18a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20.5 20.5L19 19M5 19l-1.5 1.5M20.5 3.5L19 5"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </span>
-
+              <span class="theme-toggle-icon"><i class="fas fa-sun"></i></span>
               <input type="checkbox" id="theme-toggle-checkbox" class="theme-toggle-checkbox" />
               <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
-
-              <span class="theme-toggle-icon" aria-hidden="true">
-                <!-- Moon -->
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                  <path d="M21 12.8A8.5 8.5 0 0 1 11.2 3a6.5 6.5 0 1 0 9.8 9.8Z"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
+              <span class="theme-toggle-icon"><i class="fas fa-moon"></i></span>
             </label>
           </div>
         </div>
 
-        <!-- Menu desktop -->
         <div class="hidden md:flex md:items-center md:ml-6">
           <div class="flex space-x-4">
-            <!-- Dashboard (attiva) -->
             <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="h-4 w-4 mr-1">
-                <rect width="8" height="18" x="3" y="3" rx="1"/>
-                <path d="M7 3v18"/>
-                <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z"/>
-              </svg>
-              Dashboard
+              <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
             </a>
-
-            <!-- Codice penale (pagina corrente evidenziata) -->
             <a href="penale.html" class="bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="h-4 w-4 mr-1">
-                <path d="M10 18v-7"/>
-                <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/>
-                <path d="M14 18v-7"/>
-                <path d="M18 18v-7"/>
-                <path d="M3 22h18"/>
-                <path d="M6 18v-7"/>
-              </svg>
-              Codice penale
+              <i class="fas fa-gavel mr-1"></i> Codice penale
             </a>
-
-            <!-- Codice della strada -->
             <a href="strada.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="h-4 w-4 mr-1">
-                <path d="M16.05 10.966a5 2.5 0 0 1-8.1 0"/>
-                <path d="m16.923 14.049 4.48 2.04a1 1 0 0 1 .001 1.831l-8.574 3.9a2 2 0 0 1-1.66 0l-8.574-3.91a1 1 0 0 1 0-1.83l4.484-2.04"/>
-                <path d="M16.949 14.14a5 2.5 0 1 1-9.9 0L10.063 3.5a2 2 0 0 1 3.874 0z"/>
-                <path d="M9.194 6.57a5 2.5 0 0 0 5.61 0"/>
-              </svg>
-              Codice della strada
+              <i class="fas fa-road mr-1"></i> Codice della strada
             </a>
-
-            <!-- Rapporti -->
             <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="h-4 w-4 mr-1">
-                <path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/>
-                <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
-                <path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/>
-              </svg>
-              Rapporti
-            </a>
-
-            <!-- Torna alla dashboard (log-out) -->
-            <a href="index.html" id="back-to-dashboard" class="ml-2 bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center hover:bg-black">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="h-4 w-4 mr-1">
-                <path d="m16 17 5-5-5-5"/>
-                <path d="M21 12H9"/>
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-              </svg>
-              Torna alla dashboard
+              <i class="fas fa-file-alt mr-1"></i> Rapporti
             </a>
           </div>
         </div>
 
-        <!-- Pulsante menu mobile -->
         <div class="flex items-center md:hidden">
           <button id="mobile-menu-button" type="button"
                   class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 focus:outline-none">
             <span class="sr-only">Apri menu principale</span>
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <i class="fas fa-bars"></i>
           </button>
         </div>
+
       </div>
     </div>
 
-    <!-- Menu mobile -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700">
       <div class="container mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <!-- Data e ora -->
         <div class="flex items-center text-gray-600 dark:text-gray-300 text-sm px-3 py-2">
-          <svg class="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
+          <i class="far fa-clock mr-2"></i>
           <span id="mobile-current-datetime">--</span>
         </div>
 
-        <!-- Toggle tema -->
         <div class="flex items-center px-3 py-2">
           <label class="theme-toggle" for="mobile-theme-toggle-checkbox">
-            <span class="theme-toggle-icon" aria-hidden="true">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                <path d="M12 18a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-            </span>
+            <span class="theme-toggle-icon"><i class="fas fa-sun"></i></span>
             <input type="checkbox" id="mobile-theme-toggle-checkbox" class="theme-toggle-checkbox" />
             <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
-            <span class="theme-toggle-icon" aria-hidden="true">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                <path d="M21 12.8A8.5 8.5 0 0 1 11.2 3a6.5 6.5 0 1 0 9.8 9.8Z"
-                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
+            <span class="theme-toggle-icon"><i class="fas fa-moon"></i></span>
           </label>
         </div>
 
-        <!-- Voci menu -->
         <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="h-5 w-5 mr-2">
-            <rect width="8" height="18" x="3" y="3" rx="1"/>
-            <path d="M7 3v18"/>
-            <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z"/>
-          </svg>
-          Dashboard
+          <i class="fas fa-tachometer-alt mr-2 w-5 text-center"></i> Dashboard
         </a>
-
         <a href="penale.html" class="bg-blue-700 text-white block px-3 py-2 rounded-md text-base font-medium flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="h-5 w-5 mr-2">
-            <path d="M10 18v-7"/>
-            <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/>
-            <path d="M14 18v-7"/>
-            <path d="M18 18v-7"/>
-            <path d="M3 22h18"/>
-            <path d="M6 18v-7"/>
-          </svg>
-          Codice penale
+          <i class="fas fa-gavel mr-2 w-5 text-center"></i> Codice penale
         </a>
-
         <a href="strada.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="h-5 w-5 mr-2">
-            <path d="M16.05 10.966a5 2.5 0 0 1-8.1 0"/>
-            <path d="m16.923 14.049 4.48 2.04a1 1 0 0 1 .001 1.831l-8.574 3.9a2 2 0 0 1-1.66 0l-8.574-3.91a1 1 0 0 1 0-1.83l4.484-2.04"/>
-            <path d="M16.949 14.14a5 2.5 0 1 1-9.9 0L10.063 3.5a2 2 0 0 1 3.874 0z"/>
-            <path d="M9.194 6.57a5 2.5 0 0 0 5.61 0"/>
-          </svg>
-          Codice della strada
+          <i class="fas fa-road mr-2 w-5 text-center"></i> Codice della strada
         </a>
-
         <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 block px-3 py-2 rounded-md text-base font-medium flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="h-5 w-5 mr-2">
-            <path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/>
-            <path d="M14 2v5a1 1 0 0 0 1 1h5"/>
-            <path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/>
-          </svg>
-          Rapporti
-        </a>
-
-        <!-- Torna alla dashboard mobile -->
-        <a href="index.html" id="back-to-dashboard-mobile" class="mt-1 bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="h-5 w-5 mr-2">
-            <path d="m16 17 5-5-5-5"/>
-            <path d="M21 12H9"/>
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-          </svg>
-          Torna alla dashboard
+          <i class="fas fa-file-alt mr-2 w-5 text-center"></i> Rapporti
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- HEADER SEZIONE (con icona landmark) -->
+  <!-- HEADER -->
   <header class="bg-blue-700 text-white shadow-lg">
     <div class="container mx-auto px-4 py-6">
       <h1 class="text-3xl font-bold flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="h-8 w-8">
-          <path d="M10 18v-7"/>
-          <path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/>
-          <path d="M14 18v-7"/>
-          <path d="M18 18v-7"/>
-          <path d="M3 22h18"/>
-          <path d="M6 18v-7"/>
-        </svg>
-        Codice penale
+        <i class="fas fa-gavel"></i> Codice penale
       </h1>
       <p class="mt-2 text-blue-100">Visualizza, cerca e seleziona reati dal codice penale</p>
     </div>
   </header>
 
-  <!-- QUI mantieni tutto il contenuto originale della pagina penale:
-       - filtri
-       - tabella reati
-       - riepilogo
-       Non lo riscrivo per intero per non rompere il tuo markup esistente. -->
+  <main class="container mx-auto px-4 py-4">
 
-  <!-- INCOLLA QUI sotto il tuo attuale <main> / contenuto di penale.html -->
+    <div id="search-summary-container">
+      <!-- FILTRI -->
+      <div id="search-filters" class="bg-white dark:bg-gray-800 rounded-lg mb-4 shadow-md p-4">
+        <div class="flex flex-col md:flex-row md:items-center md:flex-wrap gap-4">
 
+          <div class="relative flex-grow">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <i class="fas fa-search text-gray-400"></i>
+            </div>
+            <input type="text" id="search-input"
+                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   placeholder="Cerca per reato o norma...">
+          </div>
+
+          <div class="relative inline-block" id="categoria-dropdown-container">
+            <button type="button" id="categoria-dropdown-button"
+                    class="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md flex items-center whitespace-nowrap overflow-hidden"
+                    style="width:210px;text-overflow:ellipsis;">
+              <span class="truncate">Filtra per categoria</span>
+              <i class="fas fa-chevron-down ml-2"></i>
+            </button>
+
+            <div id="categoria-dropdown-menu"
+                 class="absolute z-10 mt-1 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 hidden overflow-auto max-h-60"
+                 style="width:250px;max-height:300px;">
+              <div class="py-1">
+                <button type="button"
+                        class="categoria-filter w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        data-categoria="CONTRO LO STATO">
+                  CONTRO LO STATO
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4">
+            <button type="button" id="reset-filters"
+                    class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md flex items-center gap-2">
+              <i class="fas fa-xmark"></i> Pulisci filtri
+            </button>
+
+            <button type="button" onclick="clearSelected()"
+                    class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-md flex items-center gap-2">
+              <i class="fas fa-xmark"></i> Pulisci reati
+            </button>
+
+            <button type="button" id="toggle-riepilogo" data-state="1"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md flex items-center gap-2">
+              <i class="fas fa-eye-slash"></i>
+              <span>Nascondi riepilogo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- separatore -->
+      <div id="custom-separator" class="bg-white dark:bg-gray-800 px-8">
+        <div class="border-t border-gray-200 mx-4"></div>
+      </div>
+
+      <!-- riepilogo (popolato da penale.js) -->
+      <div id="riepilogo-container" class="bg-white dark:bg-gray-800 rounded-t-none rounded-b-lg shadow-md p-6 mb-4"></div>
+    </div>
+
+    <!-- TABELLA -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+      <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Elenco reati del codice penale</h2>
+        <p class="mt-1 text-sm text-gray-500" id="reati-conteggio">0 reati trovati. Seleziona i reati per aggiungerli al riepilogo.</p>
+      </div>
+
+      <div class="table-container">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50 dark:bg-gray-700">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Seleziona</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reato</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Norma</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Categoria</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Sanzione</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reclusione</th>
+            </tr>
+          </thead>
+
+          <tbody id="reati-tabella" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            <!-- ESEMPIO 1 -->
+            <tr>
+              <td class="px-4 py-3">
+                <button type="button" onclick="toggleReato('277cp')" aria-label="Seleziona reato">
+                  <!-- QUESTO È IL CHECKBOX -->
+                  <i id="reato-icon-277cp" class="fa-regular fa-square"></i>
+                </button>
+              </td>
+
+              <td class="px-4 py-3 font-semibold text-gray-900 dark:text-white">
+                Offesa alla libertà del Presidente della Repubblica
+              </td>
+
+              <td class="px-4 py-3">
+                <button type="button" onclick="apriNorma('art. 277 c.p.')" class="norma-pill">
+                  <i class="fas fa-book"></i> art. 277 c.p.
+                </button>
+              </td>
+
+              <td class="px-4 py-3 text-gray-700 dark:text-gray-200">
+                CONTRO LO STATO
+              </td>
+
+              <td class="px-4 py-3 text-gray-700 dark:text-gray-200">
+                -
+              </td>
+
+              <td class="px-4 py-3 text-gray-700 dark:text-gray-200">
+                15 mesi
+              </td>
+            </tr>
+
+            <!-- DUPLICA QUI I TR -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- JS pagina -->
+  <script src="assets/js/penale.js"></script>
+
+  <!-- Link Brocardi -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof setNormaLinks === "function") {
+        setNormaLinks(
+          "art. 277 c.p.|https://www.brocardi.it/codice-penale/libro-secondo/titolo-primo/capo-i/art277.html"
+        );
+      }
+    });
+  </script>
 </body>
 </html>
